@@ -102,12 +102,21 @@ export function allRGB(colors: string[]): boolean {
 /**
  * Consumes an array of numbers, and produces a string representation of the
  * numbers being added together along with their actual sum.
- *
+ 
  * For instance, the array [1, 2, 3] would become "6=1+2+3".
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    const calculateSum = addends.reduce(
+        (currentTotal: number, num: number) => currentTotal + num,
+        0
+    );
+    const theNumbers = addends.join("+");
+    if (addends.length === 0) {
+        return calculateSum + "=" + 0;
+    } else {
+        return calculateSum + "=" + theNumbers;
+    }
 }
 
 /**
