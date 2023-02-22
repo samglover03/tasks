@@ -43,9 +43,11 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
+    // Removing dollar signs if they have one
     const dollarsRemoved = amounts.map((amounts: string): string =>
         amounts.charAt(0) === "$" ? amounts.substring(1) : amounts
     );
+    // Converting strings to ints
     const dollarNumbers = dollarsRemoved.map((amounts: string): number =>
         parseInt(amounts) ? parseInt(amounts) : 0
     );
@@ -88,7 +90,7 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    if (allRGB.length === 0){
+    if (allRGB.length === 0) {
         return true;
     } else {
         const allColors = colors.every(
@@ -129,5 +131,30 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    // If there are no negative nums, return array with sum at end
+    if (values.every((values: number): boolean => values >= 0)) {
+        const firstSum = values.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0
+        );
+        const fixedArray = [...values, firstSum];
+        return fixedArray;
+    } else {
+        // Finding index of the first negative number
+        const firstNegative = values.findIndex(
+            (values: number): boolean => values <= 0
+        );
+        // Adding the numbers before the first neg num to a new array
+        const firstNums = values
+            .slice(0, firstNegative)
+            .map((values: number): number => values);
+        // Adding the sum of those numbers up
+        const sum = firstNums.reduce(
+            (currentTotal: number, num: number) => currentTotal + num,
+            0
+        );
+        const fixedArray = [...values];
+        fixedArray.splice(firstNegative + 1, 0, sum);
+        return fixedArray;
+    }
 }
