@@ -43,9 +43,7 @@ export function isValid(question: Question, answer: string): boolean {
     if (question.type === "short_answer_question"){
         return true;
     } else {
-        if (question.options.includes(answer)) {
-            return true;
-        }
+        return question.options.includes(answer) ? true : false;
     }
     return false;
 }
@@ -86,7 +84,8 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return question;
+    const newQuestion = { ...question, name: newName };
+    return newQuestion;
 }
 
 /**
