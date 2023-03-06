@@ -76,16 +76,16 @@ export function toShortForm(question: Question): string {
  */
 export function toMarkdown(question: Question): string {
     const addedDash = question.options.map(
-        (option: string): string => "- " + option + "\n"
+        (option: string): string => "- " + option
     );
     return question.options.length === 0
-        ? "# " +
+        ? "# " + question.name + "\n" + question.body
+        : "# " +
               question.name +
               "\n" +
               question.body +
               "\n" +
-              addedDash.join("")
-        : "# " + question.name + "\n" + question.body;
+              addedDash.join("\n");
 }
 
 /**
