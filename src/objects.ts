@@ -1,6 +1,6 @@
-import { stringify } from "querystring";
-import { ListFormat } from "typescript";
-import { isQuestion } from "./functions";
+//import { stringify } from "querystring";
+//import { ListFormat } from "typescript";
+//import { isQuestion } from "./functions";
 import { Question, QuestionType } from "./interfaces/question";
 
 /**
