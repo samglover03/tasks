@@ -45,7 +45,6 @@ export function isValid(question: Question, answer: string): boolean {
     } else {
         return question.options.includes(answer) ? true : false;
     }
-    return false;
 }
 
 /**
@@ -76,7 +75,17 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    const addedDash = question.options.map(
+        (option: string): string => "- " + option + "\n"
+    );
+    return question.options.length === 0
+        ? "# " +
+              question.name +
+              "\n" +
+              question.body +
+              "\n" +
+              addedDash.join("")
+        : "# " + question.name + "\n" + question.body;
 }
 
 /**
@@ -94,7 +103,11 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    if (question.published === false) {
+        return { ...question, published: true };
+    } else {
+        return { ...question, published: false };
+    }
 }
 
 /**
