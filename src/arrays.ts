@@ -114,11 +114,9 @@ export function makeMath(addends: number[]): string {
         0
     );
     const theNumbers = addends.join("+");
-    if (addends.length === 0) {
-        return calculateSum + "=" + 0;
-    } else {
-        return calculateSum + "=" + theNumbers;
-    }
+    return addends.length === 0
+        ? calculateSum + "=" + 0
+        : calculateSum + "=" + theNumbers;
 }
 
 /**
