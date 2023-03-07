@@ -1,3 +1,4 @@
+import { match } from "assert";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 
@@ -18,7 +19,13 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    const nonEmpty = questions.filter(
+        (question: Question): boolean =>
+            question.body.length !== 0 ||
+            question.expected.length !== 0 ||
+            question.options.length !== 0
+    );
+    return nonEmpty;
 }
 
 /***
@@ -37,7 +44,10 @@ export function findQuestion(
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return [];
+    const removedId = questions.filter(
+        (question: Question): boolean => question.id !== id
+    );
+    return removedId;
 }
 
 /***
