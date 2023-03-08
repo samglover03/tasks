@@ -36,7 +36,7 @@ export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
-    return null;
+        return null;
 }
 
 /**
@@ -77,7 +77,14 @@ export function sumPoints(questions: Question[]): number {
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    return 0;
+    const onlyPublished = questions.filter((questions: Question): boolean => questions.published
+    );
+    const sumPublished = onlyPublished.reduce(
+        (currentSum: number, question: Question) =>
+            currentSum + question.points,
+        0
+    );
+    return sumPublished;
 }
 
 /***
