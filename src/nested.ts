@@ -253,27 +253,6 @@ export function editOption(
         }
     });
     return edited;
-    // const splicedArray = {...questions, options: [...questions.op]}
-    // const changedArray = questions.map(
-    //     (question: Question): Question =>
-    //         targetOptionIndex === -1
-    //             ? { ...question, options: [...question.options, newOption] }
-    //             : {
-    //                   ...question,
-    //                   options: [...question.options].splice(
-    //                       targetOptionIndex,
-    //                       0,
-    //                       newOption
-    //                   )
-    //               }
-    //);
-    // const matchingType = questions.map(
-    //     (question: Question): Question =>
-    //         question.id === targetId && targetOptionIndex === -1 ? { ...question, options: [...question.options, newOption] } : {...question,options: question.options.splice(targetOptionIndex,0,newOption
-    //                   )
-    //               }
-    // );
-    return [];
 }
 
 /***
@@ -287,22 +266,22 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    const matchingID = questions.findIndex(
-        (question: Question): boolean => question.id === targetId
-    );
-
-    console.log(matchingID);
-
-    const duplicateAnswer = duplicateQuestion(newId, questions.at(matchingID));
-
-    const deepCopy = questions.map(
+    const makeCopy = questions.map(
         (question: Question): Question => ({
             ...question,
             options: [...question.options]
         })
     );
-
-    //deepCopy.splice(targetId, 0, duplicateAnswer);
-    console.log(duplicateAnswer);
-    return matchingID;
+    if (makeCopy.length === 0) {
+        return [];
+    }
+    const foundQuestion = findQuestion(makeCopy, targetId);
+    const foundIndex = makeCopy.findIndex(
+        (question: Question): boolean => question.id === targetId
+    );
+    if (foundQuestion !== null) {
+        const copyQuestion = duplicateQuestion(newId, foundQuestion);
+        makeCopy.splice(foundIndex + 1, 0, copyQuestion);
+    }
+    return makeCopy;
 }
