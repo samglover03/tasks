@@ -1,7 +1,7 @@
 import { match } from "assert";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -230,6 +230,29 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
+    const makeCopy = questions.map(
+        (question: Question): Question => ({
+            ...question,
+            options: [...question.options]
+        })
+    );
+    const edited = makeCopy.map((question: Question): Question => {
+        if (question.id === targetId) {
+            if (targetOptionIndex === -1) {
+                return {
+                    ...question,
+                    options: [...question.options, newOption]
+                };
+            } else {
+                const newOptions = [...question.options];
+                newOptions[targetOptionIndex] = newOption;
+                return { ...question, options: newOptions };
+            }
+        } else {
+            return { ...question };
+        }
+    });
+    return edited;
     // const splicedArray = {...questions, options: [...questions.op]}
     // const changedArray = questions.map(
     //     (question: Question): Question =>
@@ -264,5 +287,22 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    const matchingID = questions.findIndex(
+        (question: Question): boolean => question.id === targetId
+    );
+
+    console.log(matchingID);
+
+    const duplicateAnswer = duplicateQuestion(newId, questions.at(matchingID));
+
+    const deepCopy = questions.map(
+        (question: Question): Question => ({
+            ...question,
+            options: [...question.options]
+        })
+    );
+
+    //deepCopy.splice(targetId, 0, duplicateAnswer);
+    console.log(duplicateAnswer);
+    return matchingID;
 }
