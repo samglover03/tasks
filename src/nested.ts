@@ -109,11 +109,8 @@ id,name,options,points,published
  * Check the unit tests for more examples!
  */
 export function toCSV(questions: Question[]): string {
-    //const onlyPublished = questions.filter((questions: Question): boolean => questionC
-    //);
-    //const questionCount = questions.reduce((optionCount: number, question: Question) => )
-    //const questionCSV = questions.map(
-    //    (question: Question): string => ${question.id}, ${question.name}, ${questions.options}.  ;
+    //const questionCount = questions.map((question: Question): Question => question.options);
+    //const questionCSV = questions.map((question: Question): string => ${question.id}, ${question.name}, ${questions.options}.  ;
     return "id,name,options,poitns,published\n";
 }
 
@@ -190,7 +187,19 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    const matchingType = questions.map(
+        (question: Question): Question =>
+            question.id === targetId
+                ? { ...question, type: newQuestionType }
+                : question
+    );
+    const emptyList = matchingType.map(
+        (question: Question): Question =>
+            question.type !== "multiple_choice_question"
+                ? { ...question, options: [] }
+                : question
+    );
+    return emptyList;
 }
 
 /**
