@@ -277,7 +277,7 @@ export function duplicateQuestionInArray(
     const foundIndex = makeCopy.findIndex(
         (question: Question): boolean => question.id === targetId
     );
-    if (foundQuestion !== null){
+    if (foundQuestion !== null) {
         const copyQuestion = duplicateQuestion(newId, foundQuestion);
         makeCopy.splice(foundIndex + 1, 0, copyQuestion);
     }
