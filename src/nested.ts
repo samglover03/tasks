@@ -1,4 +1,4 @@
-import { match } from "assert";
+//import { match } from "assert";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 import { duplicateQuestion, makeBlankQuestion } from "./objects";
@@ -81,7 +81,8 @@ export function sumPoints(questions: Question[]): number {
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    const onlyPublished = questions.filter((questions: Question): boolean => questions.published
+    const onlyPublished = questions.filter(
+        (questions: Question): boolean => questions.published
     );
     const sumPublished = onlyPublished.reduce(
         (currentSum: number, question: Question) =>
@@ -272,14 +273,11 @@ export function duplicateQuestionInArray(
             options: [...question.options]
         })
     );
-    if (makeCopy.length === 0) {
-        return [];
-    }
     const foundQuestion = findQuestion(makeCopy, targetId);
     const foundIndex = makeCopy.findIndex(
         (question: Question): boolean => question.id === targetId
     );
-    if (foundQuestion !== null) {
+    if (foundQuestion !== null){
         const copyQuestion = duplicateQuestion(newId, foundQuestion);
         makeCopy.splice(foundIndex + 1, 0, copyQuestion);
     }
