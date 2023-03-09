@@ -124,10 +124,15 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    const convertAnswer = questions.map((question: Question): Answer => {
-        question.id, "", false, false;
-    });
-    return convertAnswer;
+    const newAnswers = questions.map(
+        (question: Question): Answer => ({
+            questionId: question.id,
+            text: "",
+            submitted: false,
+            correct: false
+        })
+    );
+    return newAnswers;
 }
 
 /***
@@ -225,6 +230,26 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
+    // const splicedArray = {...questions, options: [...questions.op]}
+    // const changedArray = questions.map(
+    //     (question: Question): Question =>
+    //         targetOptionIndex === -1
+    //             ? { ...question, options: [...question.options, newOption] }
+    //             : {
+    //                   ...question,
+    //                   options: [...question.options].splice(
+    //                       targetOptionIndex,
+    //                       0,
+    //                       newOption
+    //                   )
+    //               }
+    //);
+    // const matchingType = questions.map(
+    //     (question: Question): Question =>
+    //         question.id === targetId && targetOptionIndex === -1 ? { ...question, options: [...question.options, newOption] } : {...question,options: question.options.splice(targetOptionIndex,0,newOption
+    //                   )
+    //               }
+    // );
     return [];
 }
 
