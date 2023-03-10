@@ -106,11 +106,6 @@ export function publishQuestion(question: Question): Question {
     return question.published === false
         ? { ...question, published: true }
         : { ...question, published: false };
-    // if (question.published === false) {
-    //     return { ...question, published: true };
-    // } else {
-    //     return { ...question, published: false };
-    // }
 }
 
 /**
