@@ -1,9 +1,11 @@
 import React from "react";
 import "./App.css";
-import { Button, Container } from "react-bootstrap";
-import logo from "./helloworld.jpeg";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { ChangeType } from "./components/ChangeType";
+import { RevealAnswer } from "./components/RevealAnswer";
+import { StartAttempt } from "./components/StartAttempt";
+import { TwoDice } from "./components/TwoDice";
+import { CycleHoliday } from "./components/CycleHoliday";
+import { Counter } from "./components/Counter";
 
 function App(): JSX.Element {
     return (
@@ -11,43 +13,18 @@ function App(): JSX.Element {
             <header className="App-header">
                 UD CISC275 with React Hooks and TypeScript
             </header>
-            <h1>Welcome to My Website!</h1>
-            <p>Hello World</p>
-            My List:
-            <ul>
-                <li>Test1</li>
-                <li>Test2</li>
-                <li>Test3</li>
-            </ul>
-            <div className="Rectangle">
-                <Container>
-                    <Row>
-                        <div
-                            style={{
-                                width: 350,
-                                height: 25,
-                                backgroundColor: "red"
-                            }}
-                        >
-                            <Col>First column.</Col>
-                        </div>
-                        <div
-                            style={{
-                                width: 350,
-                                height: 25,
-                                backgroundColor: "red"
-                            }}
-                        >
-                            <Col>Second column.</Col>
-                        </div>
-                    </Row>
-                </Container>
-            </div>
-            <Button onClick={() => console.log("Hello World!")}>
-                Log Hello World
-            </Button>
-            <img src={logo} alt="A picture of Hello, World" />
-            <p>Samantha Glover</p>
+            <hr></hr>
+            <Counter></Counter>
+            <hr />
+            <RevealAnswer></RevealAnswer>
+            <hr />
+            <StartAttempt></StartAttempt>
+            <hr />
+            <TwoDice></TwoDice>
+            <hr />
+            <ChangeType></ChangeType>
+            <hr />
+            <CycleHoliday></CycleHoliday>
         </div>
     );
 }
