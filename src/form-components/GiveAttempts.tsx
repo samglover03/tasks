@@ -19,9 +19,19 @@ export function GiveAttempts(): JSX.Element {
                     }
                 />
             </Form.Group>
-            {newAttempts}
-            <Button onClick={() => setNumLeft(numLeft - 1)}>Use</Button>
-            <Button onClick={() => setNumLeft(numLeft + 1)}>Gain</Button>
+            <Button
+                onClick={() => setNumLeft(numLeft - 1)}
+                disabled={numLeft === 0}
+            >
+                Use
+            </Button>
+            <Button
+                onClick={() => {
+                    numRequest === "" ? null : setNumLeft(newAttempts);
+                }}
+            >
+                Gain
+            </Button>
         </div>
     );
 }
